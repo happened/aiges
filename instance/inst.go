@@ -4,8 +4,7 @@ import "C"
 import (
 	"errors"
 	"github.com/xfyun/aiges/buffer"
-	"github.com/xfyun/aiges/catch"
-	"github.com/xfyun/aiges/codec"
+ 	"github.com/xfyun/aiges/codec"
 	"github.com/xfyun/aiges/conf"
 	"github.com/xfyun/aiges/dp"
 	"github.com/xfyun/aiges/frame"
@@ -561,8 +560,7 @@ func (si *ServiceInst) enCodecV1(data DataMeta) (code int, err error) {
 
 //	异步协程: 单线程消费计算;
 func (si *ServiceInst) asyncCalc() {
-	defer catch.RecoverHandle()
-	errNum, errInfo := nrtCheck(si)
+ 	errNum, errInfo := nrtCheck(si)
 	if errInfo == nil {
 		switch si.sessType {
 		case protocol.LoaderInput_STREAM:

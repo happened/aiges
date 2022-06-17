@@ -46,8 +46,6 @@ func auCodecInit() (err error) {
 			switch codec {
 			case codecNil:
 				aucodecs[auc] = nil
-			case codecSpeex:
-				aucodecs[auc] = &speexCodec{}
 			}
 		}
 	}
@@ -65,8 +63,6 @@ func vdCodecInit() (err error) {
 			switch codec {
 			case codecVdNil:
 				vdcodecs[vdc] = nil
-			case codecH264:
-				vdcodecs[vdc] = &h264Codec{}
 			}
 		}
 	}

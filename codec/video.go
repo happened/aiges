@@ -10,7 +10,6 @@ var vdcodecs map[string]codecor
 
 func init() {
 	vdcodecs = make(map[string]codecor)
-	ffmpegInit()
 }
 
 type vdcdesc struct {

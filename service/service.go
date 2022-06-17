@@ -2,7 +2,6 @@ package service
 
 import (
 	"fmt"
-	"github.com/xfyun/aiges/catch"
 	"github.com/xfyun/aiges/codec"
 	"github.com/xfyun/aiges/conf"
 	"github.com/xfyun/aiges/frame"
@@ -41,10 +40,6 @@ func (srv *aiService) Init(box *xsf.ToolBox) (err error) {
 		return
 	}
 
-	// 异常捕获模块
-	catch.Open(conf.Catch, conf.WrapperDelayDetectPeriod, srv.tool.Log, srv.instMngr.CatchCallBack)
-	defer catch.RecoverHandle()
-
 	// 编解码初始化
 	if err = codec.CodecInit(); err != nil {
 		srv.tool.Log.Errorf(err.Error())
@@ -80,7 +75,7 @@ func (srv *aiService) Init(box *xsf.ToolBox) (err error) {
 	}
 	// wrapper引擎初始化;
 	if srv.callbackInit != nil {
-		code, err := srv.callbackInit(conf.UsrCfgData)
+  		code, err := srv.callbackInit(conf.UsrCfgData)
 		if err != nil {
 			srv.tool.Log.Errorw("call wrapper init func fail", "code", code, "error", err.Error())
 			fmt.Println("call wrapper init func fail", "code", code, "error", err.Error())
@@ -102,8 +97,7 @@ func (srv *aiService) Finit() error {
 	srv.instMngr.Fini()
 	codec.CodecFini()
 
-	catch.Close()
-	storage.RabFini()
+ 	storage.RabFini()
 	// wrapper引擎逆初始化
 	if srv.callbackFini != nil {
 		srv.callbackFini()
